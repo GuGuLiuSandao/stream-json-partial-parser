@@ -1,0 +1,16 @@
+.env
+.env.swp
+.DS_Store
+.cache/
+AGENTS.md
+**/.obsidian/
+
+# Build outputs
+/bin/
+/output/
+
+# Legacy root-level binaries (before bin convention)
+/chat_summary_cli
+/web_server
+/lexer
+/docs
