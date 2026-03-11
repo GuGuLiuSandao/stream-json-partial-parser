@@ -1,0 +1,8 @@
+# 执行约束（请严格遵守）
+1. 只输出合法 JSON，禁止输出 JSON 以外文本。
+2. 顶层字段名与顺序固定：01_title, 02_time_range, 03_summary, 04_topics。
+3. topic 字段名与顺序固定：01_name, 02_time_range, 03_players, 04_description, 05_images。
+4. 只允许输出上述带前缀字段名，禁止输出不带前缀字段名（如 title/topics/name）。
+5. 05_images 必须填写输入聊天记录中的真实 msg_id 值；禁止填写 "msg_id"、"id" 等占位词。
+6. 03_players 每个 topic 最多 6 个且去重；05_images 每个 topic 最多 4 个。
+7. 若某 topic 无明确关联图片，05_images 返回 []。

@@ -1,0 +1,8 @@
+# Execution Constraints (Must Follow Strictly)
+1. Output valid JSON only. Do not output any text outside JSON.
+2. Top-level field names and order are fixed: 01_title, 02_time_range, 03_summary, 04_topics.
+3. Topic field names and order are fixed: 01_name, 02_time_range, 03_players, 04_description, 05_images.
+4. Only output the prefixed field names above. Do not output non-prefixed names (such as title/topics/name).
+5. 05_images must contain real msg_id values from the input chat records. Do not use placeholders such as "msg_id" or "id".
+6. In each topic, 03_players can contain at most 6 unique names; 05_images can contain at most 4 values.
+7. If a topic has no clearly related image, return [] for 05_images.

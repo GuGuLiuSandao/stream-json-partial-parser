@@ -1,0 +1,42 @@
+{
+    "type": "json_schema",
+    "json_schema": {
+        "name": "chat_summary",
+        "strict": true,
+        "schema": {
+            "type": "object",
+            "properties": {
+                "01_title": {"type": "string", "description": "Summary title"},
+                "02_time_range": {"type": "string", "description": "Overall chat time range. Must be in 'YYYY-MM-DD HH:MM - YYYY-MM-DD HH:MM' format, using the earliest and latest timestamps from the messages."},
+                "03_summary": {"type": "string", "description": "Overall summary"},
+                "04_topics": {
+                    "type": "array",
+                    "description": "List of chat topics",
+                    "items": {
+                        "type": "object",
+                        "properties": {
+                            "01_name": {"type": "string"},
+                            "02_time_range": {"type": "string", "description": "Time range for this topic. Must be in 'YYYY-MM-DD HH:MM - YYYY-MM-DD HH:MM' format, using the earliest and latest timestamps from messages related to this topic."},
+                            "03_players": {
+                                "type": "array",
+                                "items": {"type": "string"},
+                                "maxItems": 6
+                            },
+                            "04_description": {"type": "string"},
+                            "05_images": {
+                                "type": "array",
+                                "description": "List of image message IDs related to this topic (0-4 items). Each value must be a real msg_id from the input chat records. Do not use field names or placeholders (e.g., msg_id/id).",
+                                "items": {"type": "string"},
+                                "maxItems": 4
+                            }
+                        },
+                        "required": ["01_name", "02_time_range", "03_players", "04_description", "05_images"],
+                        "additionalProperties": false
+                    }
+                }
+            },
+            "required": ["01_title", "02_time_range", "03_summary", "04_topics"],
+            "additionalProperties": false
+        }
+    }
+}
