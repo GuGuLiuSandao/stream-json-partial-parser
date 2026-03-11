@@ -25,10 +25,12 @@
   <figcaption><code>Streaming Output</code>: raw stream on the left, parsed event stream on the right.</figcaption>
 </figure>
 
-<p><b>GIF 2</b>: what users actually see in the <code>Report Preview</code> tab.</p>
+<hr />
+
+<p><b>GIF 2</b>: <code>Report Preview</code> comparison. Left side renders immediately on each received event; right side renders at a fixed interval.</p>
 <figure>
   <img src="assets/demo/report_preview.gif" alt="Report Preview demo" width="100%" />
-  <figcaption><code>Report Preview</code>: real-time structured report preview for end users.</figcaption>
+  <figcaption><code>Report Preview</code>: immediate client output (left) vs fixed-interval output (right).</figcaption>
 </figure>
 
 <hr />
@@ -36,9 +38,10 @@
 <h2 id="what-problem-it-solves">What Problem It Solves</h2>
 
 <p>
-  LLM outputs arrive as chunked text streams, not as a complete JSON document.<br />
+  The core challenge appears when <b>LLM uses <code>stream</code> together with <code>response_format</code></b>.<br />
+  <code>response_format</code> expects structured JSON, but <code>stream</code> delivers fragmented bytes, so any chunk can be incomplete JSON and may even cut through UTF-8 characters.<br />
   This project focuses on <b>producing stable, consumable incremental events before JSON is fully closed</b>,
-  while preventing broken UTF-8 rendering and field mix-ups.
+  while preventing broken rendering, field cross-talk, and premature emission of incomplete fields.
 </p>
 
 <div>
@@ -137,9 +140,3 @@ summary_lang=zh
     <li><b>Larger chunks help</b>: higher throughput and lower allocation pressure in both regular and stress scenarios.</li>
   </ul>
 </details>
-
-<hr />
-
-<p align="center">
-  For a quick read: watch the two GIFs, then read “Challenges & Approach” and “Performance”.
-</p>

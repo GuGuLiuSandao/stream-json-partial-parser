@@ -25,10 +25,12 @@
   <figcaption><code>Streaming Output</code>：左侧原始流，右侧解析后事件流。</figcaption>
 </figure>
 
-<p><b>GIF 2</b>：展示 <code>Report Preview</code> 页签中用户最终看到的效果。</p>
+<hr />
+
+<p><b>GIF 2</b>：展示 <code>Report Preview</code> 对比：左边是客户端直接按收到的信息输出，右边是按固定时间间隔输出。</p>
 <figure>
   <img src="assets/demo/report_preview.gif" alt="Report Preview demo" width="100%" />
-  <figcaption><code>Report Preview</code>：用户侧结构化报告实时预览。</figcaption>
+  <figcaption><code>Report Preview</code>：左侧即时输出，右侧定时批量输出。</figcaption>
 </figure>
 
 <hr />
@@ -36,8 +38,9 @@
 <h2 id="它解决什么问题">它解决什么问题</h2>
 
 <p>
-  LLM 的输出是按 chunk 到达的，通常不是完整 JSON。<br />
-  这个项目的目标是：<b>在 JSON 尚未闭合时，也能稳定输出可消费的增量事件</b>，同时避免中文乱码和字段串台。
+  难点主要出现在：<b>LLM 同时开启 <code>stream</code> 和 <code>response_format</code></b>。<br />
+  <code>response_format</code> 要求模型生成结构化 JSON，但 <code>stream</code> 返回的是被切碎的字节流，任意 chunk 都可能是不完整 JSON 片段，甚至截断 UTF-8 字符。<br />
+  这个项目的目标是：<b>在 JSON 尚未闭合时，也能稳定输出可消费的增量事件</b>，同时避免乱码、字段串台和非完整字段误发。
 </p>
 
 <div>
@@ -136,9 +139,3 @@ summary_lang=zh
     <li><b>大 chunk 更友好</b>：吞吐更高、分配更低，这在常规和极端场景都成立。</li>
   </ul>
 </details>
-
-<hr />
-
-<p align="center">
-  如果你只想快速看核心：先看上面的两个 GIF，再看“难点与思路”和“性能概览”即可。
-</p>
